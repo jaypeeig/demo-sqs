@@ -11,24 +11,12 @@ const sqs = new AWS.SQS({
 
 const QueueUrl = 'https://ap-southeast-1.queue.amazonaws.com/362989642060/DemoQueue';
 
-const deleteMessage = (ReceiptHandle) => {
-    const deleteParams = {
-      QueueUrl,
-      ReceiptHandle
-    };
-    sqs.deleteMessage(deleteParams, (err, data) => {
-      if (err) {
-        console.log('Delete Error', err)
-      } else {
-        console.log('Message Deleted', data)
-      }
-    })
-}
-
 const recieveMessage = function () {
   const params = {
     MaxNumberOfMessages: 5,
-    QueueUrl
+    QueueUrl,
+    MessageAttributeNames: ["All"]
+
   };
 
   sqs.receiveMessage(params, (err, data) => {
@@ -43,3 +31,17 @@ const recieveMessage = function () {
   })
 
 }();
+
+const deleteMessage = (ReceiptHandle) => {
+  const deleteParams = {
+    QueueUrl,
+    ReceiptHandle
+  };
+  sqs.deleteMessage(deleteParams, (err, data) => {
+    if (err) {
+      console.log('Delete Error', err)
+    } else {
+      console.log('Message Deleted', data)
+    }
+  })
+}
