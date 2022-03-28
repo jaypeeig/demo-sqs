@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "produce": "node produce",
+    "consume": "node consume",
     "create": "aws sqs create-queue --queue-name DemoQueue --attributes file://create-queue.json --profile shopfront"
   },
   "repository": {
