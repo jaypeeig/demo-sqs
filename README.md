@@ -8,6 +8,6 @@ sequenceDiagram
   participant Consumer
 
   Producer ->> SQS Queue: Send message
-  SQS Queue ->> Consumer: Deliver message
+  SQS Queue ->> Consumer: Consume message
   Consumer ->> SQS Queue: ACK message
 ```
