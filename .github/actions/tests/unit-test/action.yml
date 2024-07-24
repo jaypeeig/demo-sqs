@@ -15,5 +15,5 @@ runs:
       uses: ./.github/actions/builds/npm-install
 
     - name: Run unit test
+      shell: bash
       run: npm run test
-      timeout-minutes: 20

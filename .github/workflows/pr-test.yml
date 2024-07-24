@@ -24,3 +24,5 @@ jobs:
 
       - name: Run unit test
         uses: ./.github/actions/tests/unit-test
+        timeout-minutes: 20
+        

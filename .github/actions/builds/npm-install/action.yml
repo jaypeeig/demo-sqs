@@ -12,4 +12,12 @@ runs:
         key: modules-${{ hashFiles('package-lock.json') }}
 
     - name: Install dependencies
-      run: npm install
+      shell: bash
+      run: |
+          if [ ! -d "node_modules" ]; then
+            echo "Cache not found, installing dependencies."
+            npm clean-install
+          else
+            echo "Cache found, skipping npm install."
+            ls -la
+          fi
