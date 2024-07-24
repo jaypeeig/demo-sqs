@@ -11,7 +11,7 @@ runs:
         path: ./node_modules
         key: modules-${{ hashFiles('package-lock.json') }}
 
-    - name: Install dependencies if cache is missed
+    - name: Install dependencies if cache is missed.
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       run: npm clean-install
