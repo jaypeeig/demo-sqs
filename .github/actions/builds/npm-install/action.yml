@@ -15,8 +15,8 @@ runs:
       shell: bash
       run: |
           if [ ! -d "node_modules" ]; then
-            echo "Cache not found, installing dependencies..."
+            echo "Cache not found, installing dependencies."
             npm clean-install
           else
-            echo "Cache found!"
+            echo "Cache found, skipping npm install."
           fi
