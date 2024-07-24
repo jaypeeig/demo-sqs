@@ -1,0 +1,15 @@
+name: Install dependencies
+description: Perform npm install and cache node_modules
+
+runs:
+  using: composite
+  steps:
+    - name: Cache node_modules
+      id: cache
+      uses: actions/cache@v4
+      with:
+        path: ./node_modules
+        key: modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Install dependencies
+      run: npm install
