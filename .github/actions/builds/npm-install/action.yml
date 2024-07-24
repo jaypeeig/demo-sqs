@@ -19,4 +19,5 @@ runs:
             npm clean-install
           else
             echo "Cache found, skipping npm install."
+            ls -la
           fi
