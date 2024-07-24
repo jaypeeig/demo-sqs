@@ -10,7 +10,7 @@ const sqs = new AWS.SQS({
   region: 'ap-southeast-1'
 });
 
-const QueueUrl = 'https://ap-southeast-1.queue.amazonaws.com/362989642060/DemoQueue';
+const QueueUrl = 'https://sqs.ap-southeast-1.amazonaws.com/362989642060/DemoQueue';
 
 const sendMessage = function () {
   const params = {
