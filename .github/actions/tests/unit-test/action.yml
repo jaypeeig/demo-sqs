@@ -3,7 +3,6 @@ description: Run unit tests
 
 runs:
   using: composite
-  timeout-minutes: 20
   steps:
     - name: Use node.js 20.x
       uses: actions/setup-node@v4
