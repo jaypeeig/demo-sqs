@@ -13,4 +13,10 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: npm install
+      run: |
+          if [ ! -d "node_modules" ]; then
+            echo "Cache not found, installing dependencies..."
+            npm clean-install
+          else
+            echo "Cache found!"
+          fi
