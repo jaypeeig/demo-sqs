@@ -1,4 +1,4 @@
-name: Test PR
+name: Run unit test on PR
 
 on:
   # push:
