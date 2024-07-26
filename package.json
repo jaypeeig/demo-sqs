@@ -22,11 +22,9 @@
   "homepage": "https://github.com/jaypeeig/demo-sqs#readme",
   "dependencies": {
     "aws-sdk": "^2.1101.0",
-    "uuid": "^10.0.0",
     "uuidv4": "^6.2.10"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.0.0",
-    "test-runner": "^0.11.0"
+    "@faker-js/faker": "^6.0.0"
   }
 }
