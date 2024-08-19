@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   is-renovate-bot:
-    name: "[PR Opened] \n Is Renovate Bot?"
+    name: "[Opened] Is Renovate Bot?"
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     outputs:
@@ -59,7 +59,7 @@ jobs:
         run: echo "Running tests for affected PR"
   
   run-sonarqube:
-    name: "[PR Merged] \n Run SonarQube Analysis"
+    name: "[Merged] Run SonarQube Analysis"
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
