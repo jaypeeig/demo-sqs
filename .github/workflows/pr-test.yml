@@ -16,19 +16,22 @@ concurrency:
 jobs:
   is-renovate-bot:
     runs-on: ubuntu-latest
+    outputs:
+      isRenovateBot: ${{ steps.check-actor.outputs.isRenovateBot }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Check Actor
         id: check-actor
         run: |
-          echo "isRenovateBot=$([[ '${{ github.actor }}' == 'renovate[bot]' || '${{ github.actor }}' == 'renovate-bot' ]] && echo 1 || echo 0)" >> $GITHUB_ENV
+          if [[ '${{ github.actor }}' == 'renovate[bot]' || '${{ github.actor }}' == 'renovate-bot' ]]; then
+            echo "::set-output name=isRenovateBot::1"
+          else
+            echo "::set-output name=isRenovateBot::0"
+          fi
 
   test-renovate:
     name: Test Renovate PR
     needs: is-renovate-bot
-    if: ${{ env.isRenovateBot }} == '1'
+    if: needs.is-renovate-bot.outputs.isRenovateBot == '1'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -43,12 +46,14 @@ jobs:
   test-affected-pr:
     name: Test Affected PR
     needs: is-renovate-bot
-    if: ${{ env.isRenovateBot }} == '0'
+    if: needs.is-renovate-bot.outputs.isRenovateBot == '0'
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Echo Message
+        run: echo "Running tests for affected PR"
 
         
