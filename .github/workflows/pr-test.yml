@@ -32,7 +32,7 @@ jobs:
   test-renovate:
     name: "YES - run all tests"
     needs: is-renovate-bot
-    if: needs.is-renovate-bot.outputs.isRenovateBot == '1'
+    if: needs.is-renovate-bot.outputs.isRenovateBot == '1' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -47,7 +47,7 @@ jobs:
   test-affected-pr:
     name: "NO - run tests for affected projects"
     needs: is-renovate-bot
-    if: needs.is-renovate-bot.outputs.isRenovateBot == '0'
+    if: needs.is-renovate-bot.outputs.isRenovateBot == '0' && github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     permissions:
       contents: read
