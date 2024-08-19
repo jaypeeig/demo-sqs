@@ -1,11 +1,11 @@
-name: Run unit test on PR
+name: Pull Request Pipeline
 
 on:
-  # push:
-  #   branches:
-  #     - main
   pull_request:
     types: [opened, reopened, synchronize]
+    branches:
+      - main
+  push:
     branches:
       - main
 
@@ -14,7 +14,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  main:
+  is-renovate-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Actor
+        id: check-actor
+        run: |
+          echo "isRenovateBot=$([[ '${{ github.actor }}' == 'renovate[bot]' || '${{ github.actor }}' == 'renovate-bot' ]] && echo 1 || echo 0)" >> $GITHUB_ENV
+
+  test-renovate:
+    name: Test Renovate PR
+    needs: is-renovate-bot
+    if: ${{ env.isRenovateBot }} == '1'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,4 +39,16 @@ jobs:
       - name: Run unit test
         uses: ./.github/actions/tests/unit-test
         timeout-minutes: 20
+
+  test-affected-pr:
+    name: Test Affected PR
+    needs: is-renovate-bot
+    if: ${{ env.isRenovateBot }} == '0'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
         

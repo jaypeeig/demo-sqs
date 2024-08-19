@@ -10,6 +10,7 @@
   "automergeStrategy": "merge-commit",
   "branchConcurrentLimit": 5,
   "prHourlyLimit": 2,
+  "separateMinorPatch": true,
   "packageRules": [
     {
       "matchBaseBranches": ["main"],
