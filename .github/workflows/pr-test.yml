@@ -56,5 +56,15 @@ jobs:
         uses: actions/checkout@v4
       - name: Echo Message
         run: echo "Running tests for affected PR"
+  
+  sonarqube:
+    name: "Run SonarQube Analysis"
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Echo Message
+        run: echo "Running SonarQube Analysis"
 
         
