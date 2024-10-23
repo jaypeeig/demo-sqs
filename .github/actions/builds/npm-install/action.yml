@@ -6,7 +6,7 @@ runs:
   steps:
     - name: Cache node_modules
       id: cache
-      uses: actions/cache@v4
+      uses: actions/cache@6849a6489940f00c2f30c0fb92c6274307ccb58a # v4
       with:
         path: ./node_modules
         key: modules-${{ hashFiles('package-lock.json') }}
