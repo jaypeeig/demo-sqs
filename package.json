@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^6.0.0",
-    "nx": "19.8.13"
+    "nx": "19.8.14"
   },
   "nx": {}
 }
