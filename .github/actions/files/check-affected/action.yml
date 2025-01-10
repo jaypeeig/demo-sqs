@@ -12,7 +12,10 @@ outputs:
 runs:
   using: 'composite'
   steps:
-
+    - name: Checkout
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      with:
+        fetch-depth: 0
     - name: Get affected files
       id: get_diff
       shell: bash
@@ -20,7 +23,7 @@ runs:
         echo "Fetching affected files..."
         files=$(git diff --name-only ${{ inputs.commit_ref }} HEAD)
         echo "Affected files: $files"
-        
+
         # Wrapping the multi-line output in a format for GitHub Actions
         echo "files<<EOF" >> $GITHUB_OUTPUT
         echo "$files" >> $GITHUB_OUTPUT
