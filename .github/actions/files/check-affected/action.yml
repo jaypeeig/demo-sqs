@@ -20,4 +20,8 @@ runs:
         echo "Fetching affected files..."
         files=$(git diff --name-only ${{ inputs.commit_ref }} HEAD)
         echo "Affected files: $files"
-        echo "files=${files}" >> $GITHUB_OUTPUT
+        
+        # Wrapping the multi-line output in a format for GitHub Actions
+        echo "files<<EOF" >> $GITHUB_OUTPUT
+        echo "$files" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
