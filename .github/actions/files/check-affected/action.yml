@@ -12,6 +12,7 @@ outputs:
 runs:
   using: 'composite'
   steps:
+
     - name: Get affected files
       id: get_diff
       shell: bash
@@ -19,4 +20,4 @@ runs:
         echo "Fetching affected files..."
         files=$(git diff --name-only ${{ inputs.commit_ref }} HEAD)
         echo "Affected files: $files"
-        echo "files=$files" >> $GITHUB_OUTPUT
+        echo "files=${files}" >> $GITHUB_OUTPUT
