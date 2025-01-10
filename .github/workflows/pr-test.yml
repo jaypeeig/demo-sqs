@@ -60,10 +60,11 @@ jobs:
   
   check-affected-files:
     name: Check Affected files
-    needs: is-renovate-bot
-    if: needs.is-renovate-bot.outputs.isRenovateBot == '0'
+    needs: test-affected-pr
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - uses: ./.github/actions/files/check-affected
 
         
