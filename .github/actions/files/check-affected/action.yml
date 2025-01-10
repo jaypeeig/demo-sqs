@@ -5,6 +5,10 @@ inputs:
     description: The commit reference to compare against.
     required: false
     default: 'HEAD^1'
+outputs:
+  files:
+    description: The list of affected files.
+    value: ${{ steps.get_diff.outputs.files }}
 runs:
   using: 'composite'
   steps:
@@ -15,3 +19,4 @@ runs:
         echo "Fetching affected files..."
         files=$(git diff --name-only ${{ inputs.commit_ref }} HEAD)
         echo "Affected files: $files"
+        echo "files=$files" >> $GITHUB_OUTPUT
