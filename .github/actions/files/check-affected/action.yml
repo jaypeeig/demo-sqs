@@ -1,0 +1,17 @@
+name: Check Affected Files
+description: This action checks the affected files by comparing the current commit with the previous commit.
+inputs:
+  commit_ref:
+    description: The commit reference to compare against.
+    required: false
+    default: 'HEAD^1'
+runs:
+  using: 'composite'
+  steps:
+    - name: Get affected files
+      id: get_diff
+      shell: bash
+      run: |
+        echo "Fetching affected files..."
+        files=$(git diff --name-only ${{ inputs.commit_ref }} HEAD)
+        echo "Affected files: $files"
