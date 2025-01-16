@@ -1,0 +1,30 @@
+name: Verify AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  verify-aws:
+    name: Verify AWS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Verify AWS
+        run: echo "Verifying AWS"
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@50ac8dd1e1b10d09dac7b8727528b91bed831ac0 # v3
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::147997150703:role/github-actions-demo-sqs-role
+          role-session-name: cec-github-oidc
+      - name: List S3 Queues
+        shell: bash
+        run: |
+          aws sts get-caller-identity
+          aws sqs s3 ls
+
+
+        
