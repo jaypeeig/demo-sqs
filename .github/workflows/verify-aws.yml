@@ -6,14 +6,13 @@ on:
       - main
       - feature/check-files
 
-permissions:
-  id-token: write
 
 jobs:
   verify-aws:
     name: Verify AWS
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
     steps:
       - name: Checkout
