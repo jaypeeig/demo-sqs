@@ -15,7 +15,7 @@ sequenceDiagram
 
 ```mermaid
 architecture-beta
-    group api(logos:aws-lambda)[API]
+    group api(logos:cloud)[API]
 
     service db(logos:aws-aurora)[Database] in api
     service disk1(logos:aws-glacier)[Storage] in api
