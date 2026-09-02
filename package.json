@@ -1,32 +1,59 @@
 {
   "name": "demo-sqs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified yet...\" && exit 0",
-    "produce": "node produce",
-    "consume": "node consume",
-    "create": "aws sqs create-queue --queue-name DemoQueue --attributes file://create-queue.json --profile shopfront"
+  "version": "2.0.0",
+  "private": true,
+  "description": "SQS produce/consume demo for the Solutions Monthly BrownBag Session, running entirely against a local ElasticMQ container.",
+  "keywords": [],
+  "homepage": "https://github.com/jaypeeig/demo-sqs#readme",
+  "bugs": {
+    "url": "https://github.com/jaypeeig/demo-sqs/issues"
   },
+  "license": "ISC",
+  "author": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jaypeeig/demo-sqs.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jaypeeig/demo-sqs/issues"
+  "type": "module",
+  "scripts": {
+    "sqs:up": "docker compose up -d --wait",
+    "sqs:down": "docker compose down",
+    "sqs:logs": "docker compose logs -f sqs",
+    "queue:create": "tsx src/bin/create-queue.ts",
+    "produce": "tsx src/bin/produce.ts",
+    "consume": "tsx src/bin/consume.ts",
+    "worker": "tsx src/bin/worker.ts",
+    "dev": "npm run sqs:up && npm run queue:create && npm run worker",
+    "demo": "npm run produce -- 5",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint . --fix",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "typecheck": "tsc",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "test:coverage": "vitest run --config vitest.config.ts --coverage",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test"
   },
-  "homepage": "https://github.com/jaypeeig/demo-sqs#readme",
   "dependencies": {
-    "aws-sdk": "^2.1101.0",
-    "uuidv4": "^6.2.10"
+    "@aws-sdk/client-sqs": "^3.1124.0",
+    "dotenv": "^17.4.2"
   },
   "devDependencies": {
-    "@faker-js/faker": "^6.0.0",
-    "nx": "19.8.14"
+    "@types/node": "^26.4.1",
+    "@vitest/coverage-v8": "^4.1.11",
+    "aws-sdk-client-mock": "^4.1.0",
+    "oxfmt": "^0.66.0",
+    "oxlint": "^1.81.0",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
   },
-  "nx": {}
+  "engines": {
+    "node": ">=22"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
 }
