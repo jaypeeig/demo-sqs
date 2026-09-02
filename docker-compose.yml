@@ -1,0 +1,16 @@
+services:
+  sqs:
+    image: softwaremill/elasticmq-native:latest
+    container_name: demo-sqs-elasticmq
+    ports:
+      - "9324:9324" # SQS API
+      - "9325:9325" # Web UI - browse queues at http://localhost:9325
+    volumes:
+      - ./docker/elasticmq.conf:/opt/elasticmq.conf:ro
+    healthcheck:
+      # ElasticMQ answers 400 on a plain GET (it only speaks the SQS POST
+      # protocol), so a plain TCP check is the reliable "is it up" probe.
+      test: ["CMD", "nc", "-z", "localhost", "9324"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
