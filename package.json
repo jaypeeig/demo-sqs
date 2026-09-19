@@ -42,13 +42,13 @@
   },
   "devDependencies": {
     "@types/node": "26.6.1",
-    "@vitest/coverage-v8": "4.1.11",
+    "@vitest/coverage-v8": "5.0.1",
     "aws-sdk-client-mock": "4.1.0",
     "oxfmt": "0.68.0",
     "oxlint": "1.83.0",
     "tsx": "4.23.13",
     "typescript": "7.0.2",
-    "vitest": "4.1.11"
+    "vitest": "5.0.1"
   },
   "engines": {
     "node": ">=22"
