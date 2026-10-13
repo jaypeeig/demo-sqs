@@ -41,7 +41,7 @@
     "dotenv": "^17.4.2"
   },
   "devDependencies": {
-    "@types/node": "26.6.4",
+    "@types/node": "26.6.5",
     "@vitest/coverage-v8": "4.1.11",
     "aws-sdk-client-mock": "4.1.0",
     "oxfmt": "0.72.0",
